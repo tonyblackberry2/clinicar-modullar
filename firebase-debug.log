@@ -1,0 +1,46 @@
+[debug] [2025-05-21T21:42:50.138Z] ----------------------------------------------------------------------
+[debug] [2025-05-21T21:42:50.140Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Vitor\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2025-05-21T21:42:50.140Z] CLI Version:   14.4.0
+[debug] [2025-05-21T21:42:50.140Z] Platform:      win32
+[debug] [2025-05-21T21:42:50.140Z] Node Version:  v22.15.0
+[debug] [2025-05-21T21:42:50.140Z] Time:          Wed May 21 2025 18:42:50 GMT-0300 (Horário Padrão de Brasília)
+[debug] [2025-05-21T21:42:50.140Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-05-21T21:42:50.297Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-21T21:42:50.297Z] > authorizing via signed-in user (tonyblackberry2@gmail.com)
+[debug] [2025-05-21T21:42:50.297Z] [iam] checking project clinica-modullar for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-05-21T21:42:50.298Z] Checked if tokens are valid: true, expires at: 1747866636198
+[debug] [2025-05-21T21:42:50.298Z] Checked if tokens are valid: true, expires at: 1747866636198
+[debug] [2025-05-21T21:42:50.299Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/clinica-modullar:testIamPermissions [none]
+[debug] [2025-05-21T21:42:50.299Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/clinica-modullar:testIamPermissions x-goog-quota-user=projects/clinica-modullar
+[debug] [2025-05-21T21:42:50.299Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/clinica-modullar:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-05-21T21:42:51.344Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/clinica-modullar:testIamPermissions 200
+[debug] [2025-05-21T21:42:51.344Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/clinica-modullar:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-05-21T21:42:51.344Z] Checked if tokens are valid: true, expires at: 1747866636198
+[debug] [2025-05-21T21:42:51.344Z] Checked if tokens are valid: true, expires at: 1747866636198
+[debug] [2025-05-21T21:42:51.345Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/clinica-modullar [none]
+[debug] [2025-05-21T21:42:51.955Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/clinica-modullar 200
+[debug] [2025-05-21T21:42:51.955Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/clinica-modullar {"projectId":"clinica-modullar","projectNumber":"564406559083","displayName":"Clinica Modullar","name":"projects/clinica-modullar","resources":{"hostingSite":"clinica-modullar"},"state":"ACTIVE","etag":"1_150fb633-d798-4058-88c7-7dd725af60fa"}
+[info] 
+[info] === Deploying to 'clinica-modullar'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2025-05-21T21:42:51.962Z] Checked if tokens are valid: true, expires at: 1747866636198
+[debug] [2025-05-21T21:42:51.962Z] Checked if tokens are valid: true, expires at: 1747866636198
+[debug] [2025-05-21T21:42:51.962Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/clinica-modullar/versions [none]
+[debug] [2025-05-21T21:42:51.962Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/clinica-modullar/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2025-05-21T21:42:54.455Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/clinica-modullar/versions 200
+[debug] [2025-05-21T21:42:54.456Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/clinica-modullar/versions {"name":"projects/564406559083/sites/clinica-modullar/versions/040bc008fa66acf4","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[clinica-modullar]: beginning deploy... 
+[info] i  hosting[clinica-modullar]: found 177404 files in . 
+[debug] [2025-05-21T21:43:16.937Z] [hosting] uploading with 200 concurrency
+[debug] [2025-05-21T21:43:16.937Z] [hosting] hash cache [] not populated
+[debug] [2025-05-21T21:43:16.986Z] Error: EBUSY: resource busy or locked, open 'C:\Users\Vitor\ntuser.dat.LOG2'
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2025-05-21T21:43:16.986Z] Error: EBUSY: resource busy or locked, open 'C:\Users\Vitor\ntuser.dat.LOG1'
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2025-05-21T21:43:16.987Z] Error: EBUSY: resource busy or locked, open 'C:\Users\Vitor\NTUSER.DAT'
+[error] 
+[error] Error: An unexpected error has occurred.
