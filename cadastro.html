@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MODELAR Clínica Infantil - Queremos Conhecer Você!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
+        :root {
+            --azul-primario: #3498db;
+            --azul-secundario: #81cfe0;
+            --azul-claro: #f0f8ff;
+            --texto-principal: #4a647a;
+            --texto-secundario: #34495e;
+            --branco: #fff;
+            --verde: #2ecc71;
+            --verde-hover: #27ae60;
+            --laranja: #e67e22;
+            --roxo: #9b59b6;
+            --amarelo: #f1c40f;
+            --verde-claro: #00b894;
+            --azul-claro-2: #2d98da;
+            --cinza: #bdc3c7;
+            --cinza-claro: #f9f9f9;
+            --sombra: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --borda-arredondada: 15px;
+            --transicao: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--azul-claro);
+            color: var(--texto-principal);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--azul-secundario), var(--azul-primario));
+            color: var(--branco);
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: var(--sombra);
+            border-radius: 0 0 var(--borda-arredondada) var(--borda-arredondada);
+            position: relative;
+        }
+
+        .admin-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--branco);
+            color: var(--azul-primario);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: var(--transicao);
+        }
+
+        .admin-button:hover {
+            background-color: var(--azul-primario);
+            color: var(--branco);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: 1.1em;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 20px 0;
+            margin: 0;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        nav ul li {
+            margin: 0;
+        }
+
+        nav a {
+            color: var(--azul-primario);
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            background-color: var(--branco);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: var(--transicao);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        nav a:hover {
+            background-color: var(--azul-primario);
+            color: var(--branco);
+            transform: translateY(-2px);
+        }
+
+        main {
+            padding: 40px 20px;
+            background-color: var(--branco);
+            border-radius: var(--borda-arredondada);
+            box-shadow: var(--sombra);
+            margin: 40px auto;
+            max-width: 800px;
+        }
+
+        h2 {
+            color: var(--azul-primario);
+            border-bottom: 3px dotted var(--azul-secundario);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 2.4em;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .icon {
+            font-size: 1.2em;
+        }
+
+        form {
+            display: grid;
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        form div {
+            text-align: left;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--texto-secundario);
+            font-size: 1.1em;
+        }
+
+        form input[type="text"],
+        form input[type="number"],
+        form input[type="tel"],
+        form input[type="email"],
+        form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--cinza);
+            border-radius: 8px;
+            box-sizing: border-box;
+            background-color: var(--cinza-claro);
+            color: var(--texto-secundario);
+            font-size: 1em;
+            transition: var(--transicao);
+        }
+
+        form input:focus,
+        form textarea:focus {
+            outline: none;
+            border-color: var(--azul-primario);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        form button {
+            background-color: var(--verde);
+            color: var(--branco);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: var(--transicao);
+            box-shadow: var(--sombra);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px auto;
+        }
+
+        form button:hover {
+            background-color: var(--verde-hover);
+            transform: translateY(-2px);
+        }
+
+        .mensagem-erro {
+            display: none;
+            margin-top: 5px;
+            color: #e74c3c;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: var(--texto-secundario);
+            color: var(--branco);
+            font-size: 0.9em;
+            border-radius: var(--borda-arredondada) var(--borda-arredondada) 0 0;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            nav a {
+                width: 100%;
+                justify-content: center;
+            }
+
+            h1 {
+                font-size: 2.2em;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+
+            form {
+                padding: 0 15px;
+            }
+
+            form button {
+                width: 100%;
+            }
+
+            .admin-button {
+                position: static;
+                margin: 10px auto;
+                width: fit-content;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="cadastro_de_colaboradores.html" class="admin-button">
+            <span class="icon">👤</span> Área Administrativa
+        </a>
+        <h1><span class="icon">🧩</span> Clínica MODELAR</h1>
+        <p>Estamos animados para conhecer você e seu pequeno!</p>
+        <nav>
+            <ul>
+                <li><a href="servicos.html"><span class="icon">🏥</span> Nossos Serviços</a></li>
+                <li><a href="cadastro.html"><span class="icon">📝</span> Faça seu Cadastro</a></li>
+                <li><a href="agendamento.html"><span class="icon">📅</span> Agende sua Consulta</a></li>
+                <li><a href="redes-sociais.html"><span class="icon">🌐</span> Nossas Redes</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="cadastro-inicial">
+            <h2><span class="icon">✍️</span> Conte-nos um Pouquinho Sobre Seu Pequeno!</h2>
+            <p>Queremos saber mais sobre as necessidades do seu filho para oferecermos o melhor cuidado possível. Preencha o formulário abaixo e nossa equipe entrará em contato com você.</p>
+            <form action="/enviar-cadastro" method="post" id="meu-formulario">
+                <div>
+                    <label for="nome_crianca">Nome da Criança:</label>
+                    <input type="text" id="nome_crianca" name="nome_crianca" placeholder="Digite o nome do seu filho(a)" required>
+                    <span class="mensagem-erro" id="nome_crianca-erro">Apenas letras e espaços são permitidos.</span>
+                </div>
+                <div>
+                    <label for="idade_crianca">Idade da Criança:</label>
+                    <input type="number" id="idade_crianca" name="idade_crianca" placeholder="Anos" min="0">
+                    <span class="mensagem-erro" id="idade_crianca-erro">Apenas números são permitidos.</span>
+                </div>
+                <div>
+                    <label for="motivo_contato">Qual o Motivo do Contato?</label>
+                    <textarea id="motivo_contato" name="motivo_contato" rows="4" placeholder="Nos conte um pouco sobre o que você procura"></textarea>
+                </div>
+                <div>
+                    <label for="nome_responsavel">Seu Nome Completo:</label>
+                    <input type="text" id="nome_responsavel" name="nome_responsavel" placeholder="Digite seu nome completo" required>
+                    <span class="mensagem-erro" id="nome_responsavel-erro">Apenas letras e espaços são permitidos.</span>
+                </div>
+                <div>
+                    <label for="telefone_responsavel">Seu Telefone:</label>
+                    <input type="tel" id="telefone_responsavel" name="telefone_responsavel" pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}" placeholder="(XX) XXXX-XXXX ou (XX) XXXXX-XXXX" required>
+                    <span class="mensagem-erro" id="telefone_responsavel-erro">Formato de telefone inválido. Use (XX) XXXX-XXXX ou (XX) XXXXX-XXXX.</span>
+                </div>
+                <div>
+                    <label for="email_responsavel">Seu E-mail:</label>
+                    <input type="email" id="email_responsavel" name="email_responsavel" placeholder="Digite seu endereço de e-mail">
+                </div>
+                <div>
+                    <button type="submit" id="enviarCadastro"><span class="icon">✅</span> Enviar Informações</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Clínica MODELAR - Cuidado Multidisciplinar Infantil. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const formulario = document.getElementById('meu-formulario');
+            const campos = {
+                nomeCrianca: {
+                    input: document.getElementById('nome_crianca'),
+                    erro: document.getElementById('nome_crianca-erro'),
+                    regex: /^[a-zA-ZÀ-ÿ\s]+$/,
+                    permitir: /[a-zA-ZÀ-ÿ\s]/
+                },
+                idadeCrianca: {
+                    input: document.getElementById('idade_crianca'),
+                    erro: document.getElementById('idade_crianca-erro'),
+                    regex: /^[0-9]+$/,
+                    permitir: /[0-9]/
+                },
+                nomeResponsavel: {
+                    input: document.getElementById('nome_responsavel'),
+                    erro: document.getElementById('nome_responsavel-erro'),
+                    regex: /^[a-zA-ZÀ-ÿ\s]+$/,
+                    permitir: /[a-zA-ZÀ-ÿ\s]/
+                },
+                telefoneResponsavel: {
+                    input: document.getElementById('telefone_responsavel'),
+                    erro: document.getElementById('telefone_responsavel-erro'),
+                    regex: /^\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}$/,
+                    permitir: /[0-9()-]/
+                }
+            };
+
+            const validarCampo = (campo) => {
+                const { input, erro, regex } = campo;
+                if (!regex.test(input.value)) {
+                    erro.style.display = 'block';
+                    return false;
+                }
+                erro.style.display = 'none';
+                return true;
+            };
+
+            const formatarTelefone = (valor) => {
+                const numeros = valor.replace(/\D/g, '');
+                if (numeros.length <= 11) {
+                    if (numeros.length <= 2) {
+                        return numeros;
+                    } else if (numeros.length <= 6) {
+                        return `(${numeros.slice(0, 2)}) ${numeros.slice(2)}`;
+                    } else if (numeros.length <= 10) {
+                        return `(${numeros.slice(0, 2)}) ${numeros.slice(2, 6)}-${numeros.slice(6)}`;
+                    } else {
+                        return `(${numeros.slice(0, 2)}) ${numeros.slice(2, 7)}-${numeros.slice(7, 11)}`;
+                    }
+                }
+                return valor;
+            };
+
+            Object.entries(campos).forEach(([key, campo]) => {
+                const { input, permitir } = campo;
+
+                input.addEventListener('input', (e) => {
+                    if (key === 'telefoneResponsavel') {
+                        const valorFormatado = formatarTelefone(e.target.value);
+                        e.target.value = valorFormatado;
+                    } else {
+                        const valor = e.target.value;
+                        const novoValor = valor.split('').filter(char => permitir.test(char)).join('');
+                        if (valor !== novoValor) {
+                            e.target.value = novoValor;
+                        }
+                    }
+                    validarCampo(campo);
+                });
+
+                input.addEventListener('keypress', (e) => {
+                    if (!permitir.test(e.key)) {
+                        e.preventDefault();
+                    }
+                });
+
+                input.addEventListener('paste', (e) => {
+                    e.preventDefault();
+                    const texto = (e.clipboardData || window.clipboardData).getData('text');
+                    const textoFiltrado = texto.split('').filter(char => permitir.test(char)).join('');
+                    if (key === 'telefoneResponsavel') {
+                        input.value = formatarTelefone(textoFiltrado);
+                    } else {
+                        input.value = textoFiltrado;
+                    }
+                    validarCampo(campo);
+                });
+            });
+
+            formulario.addEventListener('submit', (event) => {
+                event.preventDefault();
+                
+                const todosValidos = Object.values(campos).every(validarCampo);
+                
+                if (todosValidos) {
+                    alert('Seu interesse foi registrado! Nossa equipe entrará em contato em breve para darmos o próximo passo.');
+                    formulario.reset();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

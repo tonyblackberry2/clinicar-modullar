@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MODELAR Clínica Infantil - Cadastro de Colaboradores</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
+        :root {
+            --azul-primario: #3498db;
+            --azul-secundario: #81cfe0;
+            --azul-claro: #f0f8ff;
+            --texto-principal: #4a647a;
+            --texto-secundario: #34495e;
+            --branco: #fff;
+            --verde: #2ecc71;
+            --verde-hover: #27ae60;
+            --laranja: #e67e22;
+            --roxo: #9b59b6;
+            --amarelo: #f1c40f;
+            --verde-claro: #00b894;
+            --azul-claro-2: #2d98da;
+            --cinza: #bdc3c7;
+            --cinza-claro: #f9f9f9;
+            --sombra: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --borda-arredondada: 15px;
+            --transicao: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--azul-claro);
+            color: var(--texto-principal);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--azul-secundario), var(--azul-primario));
+            color: var(--branco);
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: var(--sombra);
+            border-radius: 0 0 var(--borda-arredondada) var(--borda-arredondada);
+        }
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: 1.1em;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 20px 0;
+            margin: 0;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        nav ul li {
+            margin: 0;
+        }
+
+        nav a {
+            color: var(--azul-primario);
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            background-color: var(--branco);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: var(--transicao);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        nav a:hover {
+            background-color: var(--azul-primario);
+            color: var(--branco);
+            transform: translateY(-2px);
+        }
+
+        main {
+            padding: 40px 20px;
+            background-color: var(--branco);
+            border-radius: var(--borda-arredondada);
+            box-shadow: var(--sombra);
+            margin: 40px auto;
+            max-width: 800px;
+        }
+
+        h2 {
+            color: var(--azul-primario);
+            border-bottom: 3px dotted var(--azul-secundario);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 2.4em;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        form {
+            display: grid;
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        form div {
+            text-align: left;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--texto-secundario);
+            font-size: 1.1em;
+        }
+
+        form input[type="text"],
+        form input[type="email"],
+        form input[type="password"],
+        form select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--cinza);
+            border-radius: 8px;
+            box-sizing: border-box;
+            background-color: var(--cinza-claro);
+            color: var(--texto-secundario);
+            font-size: 1em;
+            transition: var(--transicao);
+        }
+
+        form input:focus,
+        form select:focus {
+            outline: none;
+            border-color: var(--azul-primario);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        form button {
+            background-color: var(--verde);
+            color: var(--branco);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: var(--transicao);
+            box-shadow: var(--sombra);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px auto;
+        }
+
+        form button:hover {
+            background-color: var(--verde-hover);
+            transform: translateY(-2px);
+        }
+
+        .mensagem-erro {
+            display: none;
+            margin-top: 5px;
+            color: #e74c3c;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .requisitos-senha {
+            font-size: 0.9em;
+            color: var(--texto-secundario);
+            margin-top: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: var(--texto-secundario);
+            color: var(--branco);
+            font-size: 0.9em;
+            border-radius: var(--borda-arredondada) var(--borda-arredondada) 0 0;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            nav a {
+                width: 100%;
+                justify-content: center;
+            }
+
+            h1 {
+                font-size: 2.2em;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+
+            form {
+                padding: 0 15px;
+            }
+
+            form button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><span class="icon">🧩</span> Clínica MODELAR</h1>
+        <p>Área Administrativa - Cadastro de Colaboradores</p>
+        <nav>
+            <ul>
+                <li><a href="servicos.html"><span class="icon">🏥</span> Nossos Serviços</a></li>
+                <li><a href="cadastro.html"><span class="icon">📝</span> Cadastro de Pacientes</a></li>
+                <li><a href="agendamento.html"><span class="icon">📅</span> Agendamentos</a></li>
+                <li><a href="redes-sociais.html"><span class="icon">🌐</span> Redes Sociais</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="cadastro-colaborador">
+            <h2><span class="icon">👥</span> Cadastro de Colaboradores</h2>
+            <form id="colaborador-form">
+                <div>
+                    <label for="nome">Nome Completo:</label>
+                    <input type="text" id="nome" name="nome" placeholder="Digite o nome completo" required>
+                    <span class="mensagem-erro" id="nome-erro">Apenas letras e espaços são permitidos.</span>
+                </div>
+                <div>
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email" placeholder="Digite o e-mail corporativo" required>
+                    <span class="mensagem-erro" id="email-erro">Digite um e-mail válido.</span>
+                </div>
+                <div>
+                    <label for="cargo">Cargo:</label>
+                    <select id="cargo" name="cargo" required>
+                        <option value="">Selecione o cargo</option>
+                        <option value="admin">Administrador</option>
+                        <option value="medico">Médico</option>
+                        <option value="enfermeiro">Enfermeiro</option>
+                        <option value="recepcionista">Recepcionista</option>
+                        <option value="terapeuta">Terapeuta</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" name="senha" placeholder="Digite a senha" required>
+                    <div class="requisitos-senha">
+                        A senha deve conter:
+                        <ul>
+                            <li id="tamanho">Pelo menos 8 caracteres</li>
+                            <li id="maiuscula">Uma letra maiúscula</li>
+                            <li id="minuscula">Uma letra minúscula</li>
+                            <li id="numero">Um número</li>
+                            <li id="especial">Um caractere especial</li>
+                        </ul>
+                    </div>
+                    <span class="mensagem-erro" id="senha-erro">A senha não atende aos requisitos.</span>
+                </div>
+                <div>
+                    <label for="confirmar-senha">Confirmar Senha:</label>
+                    <input type="password" id="confirmar-senha" name="confirmar-senha" placeholder="Confirme a senha" required>
+                    <span class="mensagem-erro" id="confirmar-senha-erro">As senhas não coincidem.</span>
+                </div>
+                <div>
+                    <button type="submit"><span class="icon">✅</span> Cadastrar Colaborador</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Clínica MODELAR - Cuidado Multidisciplinar Infantil. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const formulario = document.getElementById('colaborador-form');
+            const campos = {
+                nome: {
+                    input: document.getElementById('nome'),
+                    erro: document.getElementById('nome-erro'),
+                    regex: /^[a-zA-ZÀ-ÿ\s]+$/,
+                    permitir: /[a-zA-ZÀ-ÿ\s]/
+                },
+                email: {
+                    input: document.getElementById('email'),
+                    erro: document.getElementById('email-erro'),
+                    regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+                },
+                senha: {
+                    input: document.getElementById('senha'),
+                    erro: document.getElementById('senha-erro'),
+                    requisitos: {
+                        tamanho: /.{8,}/,
+                        maiuscula: /[A-Z]/,
+                        minuscula: /[a-z]/,
+                        numero: /[0-9]/,
+                        especial: /[!@#$%^&*(),.?":{}|<>]/
+                    }
+                },
+                confirmarSenha: {
+                    input: document.getElementById('confirmar-senha'),
+                    erro: document.getElementById('confirmar-senha-erro')
+                }
+            };
+
+            const validarCampo = (campo) => {
+                const { input, erro, regex, permitir } = campo;
+                
+                if (campo === campos.nome) {
+                    const valor = input.value;
+                    const novoValor = valor.split('').filter(char => permitir.test(char)).join('');
+                    if (valor !== novoValor) {
+                        input.value = novoValor;
+                    }
+                }
+
+                if (regex && !regex.test(input.value)) {
+                    erro.style.display = 'block';
+                    return false;
+                }
+
+                if (campo === campos.senha) {
+                    const senha = input.value;
+                    const requisitos = campo.requisitos;
+                    
+                    document.getElementById('tamanho').style.color = requisitos.tamanho.test(senha) ? 'green' : 'red';
+                    document.getElementById('maiuscula').style.color = requisitos.maiuscula.test(senha) ? 'green' : 'red';
+                    document.getElementById('minuscula').style.color = requisitos.minuscula.test(senha) ? 'green' : 'red';
+                    document.getElementById('numero').style.color = requisitos.numero.test(senha) ? 'green' : 'red';
+                    document.getElementById('especial').style.color = requisitos.especial.test(senha) ? 'green' : 'red';
+
+                    const senhaValida = Object.values(requisitos).every(regex => regex.test(senha));
+                    erro.style.display = senhaValida ? 'none' : 'block';
+                    return senhaValida;
+                }
+
+                if (campo === campos.confirmarSenha) {
+                    const senhasCoincidem = input.value === campos.senha.input.value;
+                    erro.style.display = senhasCoincidem ? 'none' : 'block';
+                    return senhasCoincidem;
+                }
+
+                erro.style.display = 'none';
+                return true;
+            };
+
+            Object.entries(campos).forEach(([key, campo]) => {
+                const { input } = campo;
+
+                if (key === 'nome') {
+                    input.addEventListener('keypress', (e) => {
+                        if (!campo.permitir.test(e.key)) {
+                            e.preventDefault();
+                        }
+                    });
+
+                    input.addEventListener('paste', (e) => {
+                        e.preventDefault();
+                        const texto = (e.clipboardData || window.clipboardData).getData('text');
+                        const textoFiltrado = texto.split('').filter(char => campo.permitir.test(char)).join('');
+                        input.value = textoFiltrado;
+                        validarCampo(campo);
+                    });
+                }
+
+                input.addEventListener('input', () => {
+                    validarCampo(campo);
+                    if (key === 'senha') {
+                        validarCampo(campos.confirmarSenha);
+                    }
+                });
+            });
+
+            formulario.addEventListener('submit', (event) => {
+                event.preventDefault();
+                
+                const todosValidos = Object.values(campos).every(validarCampo);
+                
+                if (todosValidos) {
+                    alert('Colaborador cadastrado com sucesso!');
+                    formulario.reset();
+                    Object.values(campos).forEach(campo => {
+                        if (campo.requisitos) {
+                            Object.keys(campo.requisitos).forEach(req => {
+                                document.getElementById(req).style.color = 'var(--texto-secundario)';
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

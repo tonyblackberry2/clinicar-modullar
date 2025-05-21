@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MODELAR Clínica Infantil - Nossos Superpoderes de Cuidado!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
+        :root {
+            --azul-primario: #3498db;
+            --azul-secundario: #81cfe0;
+            --azul-claro: #f0f8ff;
+            --texto-principal: #4a647a;
+            --texto-secundario: #555;
+            --branco: #fff;
+            --amarelo: #feca57;
+            --amarelo-hover: #ffda79;
+            --verde: #2ed573;
+            --roxo: #9b59b6;
+            --laranja: #e67e22;
+            --vermelho: #ff6b6b;
+            --azul-claro-2: #48dbfb;
+            --roxo-claro: #686de0;
+            --cinza: #7f8c8d;
+            --sombra: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --sombra-hover: 0 6px 12px rgba(0, 0, 0, 0.15);
+            --borda-arredondada: 15px;
+            --transicao: all 0.3s ease;
+            --gradiente-header: linear-gradient(135deg, var(--azul-secundario), var(--azul-primario));
+            --gradiente-botao: linear-gradient(90deg, var(--amarelo), var(--amarelo-hover));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--azul-claro);
+            color: var(--texto-principal);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: var(--gradiente-header);
+            color: var(--branco);
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: var(--sombra);
+            border-radius: 0 0 var(--borda-arredondada) var(--borda-arredondada);
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .admin-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--branco);
+            color: var(--azul-primario);
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--sombra);
+            transition: var(--transicao);
+            z-index: 10;
+        }
+
+        .admin-button:hover {
+            background-color: var(--azul-primario);
+            color: var(--branco);
+            transform: translateY(-2px);
+            box-shadow: var(--sombra-hover);
+        }
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        header p {
+            font-size: 1.1em;
+            font-style: italic;
+            opacity: 0.9;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        nav {
+            margin-top: 20px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 20px 0;
+            margin: 0;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        nav ul li {
+            margin: 0;
+        }
+
+        nav a {
+            color: var(--azul-primario);
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            background-color: var(--branco);
+            box-shadow: var(--sombra);
+            transition: var(--transicao);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        nav a:hover {
+            background-color: var(--azul-primario);
+            color: var(--branco);
+            transform: translateY(-2px);
+            box-shadow: var(--sombra-hover);
+        }
+
+        main {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex: 1;
+        }
+
+        h2 {
+            color: var(--azul-primario);
+            border-bottom: 3px dotted var(--azul-secundario);
+            padding-bottom: 15px;
+            margin-bottom: 40px;
+            font-size: 2.4em;
+            text-align: center;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .servicos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        .servico {
+            background-color: var(--branco);
+            border-radius: var(--borda-arredondada);
+            padding: 25px;
+            box-shadow: var(--sombra);
+            transition: var(--transicao);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .servico::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--azul-primario), var(--azul-secundario));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .servico:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--sombra-hover);
+        }
+
+        .servico:hover::before {
+            transform: scaleX(1);
+        }
+
+        .servico h3 {
+            color: var(--texto-principal);
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .servico p {
+            font-size: 1.1em;
+            line-height: 1.7;
+            color: var(--texto-secundario);
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        .servico h4 {
+            color: var(--azul-primario);
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .servico ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 20px;
+        }
+
+        .servico ul li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.05em;
+            padding: 8px;
+            border-radius: 8px;
+            transition: var(--transicao);
+        }
+
+        .servico ul li:hover {
+            background-color: var(--azul-claro);
+            transform: translateX(5px);
+        }
+
+        .servico a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gradiente-botao);
+            color: var(--texto-principal);
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: var(--transicao);
+            margin-top: 20px;
+            font-size: 1em;
+            position: relative;
+            overflow: hidden;
+            justify-content: center;
+        }
+
+        .servico a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .servico a:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--sombra);
+        }
+
+        .servico a:hover::before {
+            left: 100%;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #34495e;
+            color: var(--branco);
+            font-size: 0.9em;
+            border-radius: var(--borda-arredondada) var(--borda-arredondada) 0 0;
+            margin-top: 40px;
+        }
+
+        .icon {
+            font-size: 1.2em;
+        }
+
+        .icon-puzzle { color: var(--laranja); }
+        .icon-hospital { color: var(--roxo); }
+        .icon-pencil { color: var(--verde); }
+        .icon-calendar { color: var(--amarelo); }
+        .icon-globe { color: var(--azul-primario); }
+        .icon-brain { color: var(--vermelho); }
+        .icon-hand { color: var(--amarelo); }
+        .icon-speech { color: var(--azul-claro-2); }
+        .icon-book { color: var(--roxo-claro); }
+        .icon-doctor { color: var(--verde); }
+        .icon-teacher { color: var(--amarelo); }
+        .icon-tools { color: var(--cinza); }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .servicos-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+                padding: 20px;
+            }
+
+            .servico-card {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            h2 {
+                font-size: 2.2em;
+                padding: 0 15px;
+            }
+
+            .servicos-grid {
+                gap: 20px;
+                padding: 15px;
+            }
+
+            .servico-card {
+                padding: 20px;
+            }
+
+            .servico-card h3 {
+                font-size: 1.4em;
+            }
+
+            .servico-card p {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 2em;
+                margin-bottom: 25px;
+            }
+
+            .servicos-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 10px;
+            }
+
+            .servico-card {
+                padding: 20px;
+            }
+
+            .servico-card h3 {
+                font-size: 1.3em;
+            }
+
+            .servico-card p {
+                font-size: 0.95em;
+            }
+
+            .servico-card ul {
+                font-size: 0.9em;
+            }
+
+            .servico-card li {
+                margin-bottom: 8px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            body {
+                padding: 10px;
+            }
+
+            h2 {
+                font-size: 1.8em;
+                padding: 0 10px;
+            }
+
+            .servicos-grid {
+                gap: 15px;
+                padding: 5px;
+            }
+
+            .servico-card {
+                padding: 15px;
+            }
+
+            .servico-card h3 {
+                font-size: 1.2em;
+                margin-bottom: 10px;
+            }
+
+            .servico-card p {
+                font-size: 0.9em;
+                margin-bottom: 10px;
+            }
+
+            .servico-card ul {
+                font-size: 0.85em;
+                padding-left: 20px;
+            }
+
+            .servico-card li {
+                margin-bottom: 6px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            h2 {
+                font-size: 1.6em;
+            }
+
+            .servicos-grid {
+                gap: 10px;
+            }
+
+            .servico-card {
+                padding: 12px;
+            }
+
+            .servico-card h3 {
+                font-size: 1.1em;
+            }
+
+            .servico-card p {
+                font-size: 0.85em;
+            }
+
+            .servico-card ul {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="cadastro_de_colaboradores.html" class="admin-button">
+            <span class="icon">👤</span> Área Administrativa
+        </a>
+        <h1><span class="icon icon-puzzle">🧩</span> Clínica MODELAR</h1>
+        <p>Descubra nossos superpoderes de cuidado infantil!</p>
+        <nav>
+            <ul>
+                <li><a href="servicos.html"><span class="icon icon-hospital">🏥</span> Nossos Serviços</a></li>
+                <li><a href="cadastro.html"><span class="icon icon-pencil">📝</span> Faça seu Cadastro</a></li>
+                <li><a href="agendamento.html"><span class="icon icon-calendar">📅</span> Agende sua Consulta</a></li>
+                <li><a href="redes-sociais.html"><span class="icon icon-globe">🌐</span> Nossas Redes</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="servicos">
+            <h2><span class="icon icon-tools">🛠️</span> Conheça Nossos Superpoderes!</h2>
+            <div class="servicos-grid">
+                <div class="servico">
+                    <h3><span class="icon icon-brain">🧠</span> Psicologia Infantil</h3>
+                    <p>Nossos psicólogos infantis são como detetives das emoções, ajudando as crianças a entenderem seus sentimentos e a lidarem com os desafios do dia a dia.</p>
+                    <h4><span class="icon icon-doctor">👩‍⚕️</span> Nossa Equipe de Heróis da Mente:</h4>
+                    <ul>
+                        <li><span class="icon icon-doctor">👩‍⚕️</span> Dra. Aurora Mente Sã</li>
+                        <li><span class="icon icon-doctor">👨‍⚕️</span> Dr. Benício Acolhedor</li>
+                    </ul>
+                    <h4><span class="icon icon-tools">🛠️</span> Nossas Ferramentas Mágicas:</h4>
+                    <p>Terapia Cognitivo-Comportamental, Terapia do Brincar e estratégias personalizadas para cada criança.</p>
+                    <a href="agendamento.html" class="cta-button">Agende uma consulta <span aria-hidden="true">→</span></a>
+                </div>
+
+                <div class="servico">
+                    <h3><span class="icon icon-hand">🖐️</span> Terapia Ocupacional</h3>
+                    <p>Nossos terapeutas ocupacionais são como construtores de habilidades, ajudando as crianças a serem mais independentes em suas atividades.</p>
+                    <h4><span class="icon icon-doctor">👩‍⚕️</span> Nossos Construtores de Habilidades:</h4>
+                    <ul>
+                        <li><span class="icon icon-doctor">👩‍⚕️</span> Dra. Cecília Movimento Livre</li>
+                        <li><span class="icon icon-doctor">👨‍⚕️</span> Dr. Dante Habilidade Plena</li>
+                    </ul>
+                    <h4><span class="icon icon-tools">🛠️</span> Nossas Estratégias Criativas:</h4>
+                    <p>Integração Sensorial, brincadeiras terapêuticas e adaptações para um ambiente mais acessível.</p>
+                    <a href="agendamento.html" class="cta-button">Agende uma consulta <span aria-hidden="true">→</span></a>
+                </div>
+
+                <div class="servico">
+                    <h3><span class="icon icon-speech">🗣️</span> Fonoaudiologia</h3>
+                    <p>Nossos fonoaudiólogos são como maestros da comunicação, afinando a fala, a linguagem e a voz das crianças.</p>
+                    <h4><span class="icon icon-doctor">👩‍⚕️</span> Nossos Magos da Linguagem:</h4>
+                    <ul>
+                        <li><span class="icon icon-doctor">👩‍⚕️</span> Dra. Eloá Voz Clara</li>
+                        <li><span class="icon icon-doctor">👨‍⚕️</span> Dr. Fábio Eloquente</li>
+                    </ul>
+                    <h4><span class="icon icon-tools">🛠️</span> Nossas Poções Verbais:</h4>
+                    <p>Estimulação da fala, exercícios de pronúncia e ferramentas para comunicação alternativa.</p>
+                    <a href="agendamento.html" class="cta-button">Agende uma consulta <span aria-hidden="true">→</span></a>
+                </div>
+
+                <div class="servico">
+                    <h3><span class="icon icon-book">📚</span> Apoio Pedagógico</h3>
+                    <p>Nossos pedagogos são como guias do conhecimento, mostrando os melhores caminhos para aprender e superar desafios.</p>
+                    <h4><span class="icon icon-teacher">👩‍🏫</span> Nossos Mestres do Aprendizado:</h4>
+                    <ul>
+                        <li><span class="icon icon-teacher">👩‍🏫</span> Mestra Gisela Saber Construído</li>
+                        <li><span class="icon icon-teacher">👨‍🏫</span> Mestre Heitor Caminho do Saber</li>
+                    </ul>
+                    <h4><span class="icon icon-tools">🛠️</span> Nossas Estratégias Inteligentes:</h4>
+                    <p>Planos de aprendizado personalizados e técnicas para superar dificuldades específicas.</p>
+                    <a href="agendamento.html" class="cta-button">Agende uma consulta <span aria-hidden="true">→</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Clínica MODELAR - Cuidado Multidisciplinar Infantil. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const servicos = document.querySelectorAll('.servico');
+            
+            servicos.forEach(servico => {
+                const link = servico.querySelector('a');
+                if (link) {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const servicoNome = servico.querySelector('h3').textContent.trim();
+                        localStorage.setItem('servicoSelecionado', servicoNome);
+                        window.location.href = 'agendamento.html';
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

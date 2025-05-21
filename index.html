@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MODELAR Clínica Infantil - Cuidado que Inspira!</title>
+    <style>
+        :root {
+            --azul-primario: #3498db;
+            --azul-secundario: #81cfe0;
+            --azul-claro: #f0f8ff;
+            --texto-principal: #4a647a;
+            --texto-secundario: #555;
+            --branco: #fff;
+            --verde-acao: #2ecc71;
+            --verde-acao-hover: #27ae60;
+            --fonte-principal: 'Nunito', sans-serif;
+            --tamanho-h1-desktop: 2.8em;
+            --tamanho-h2-desktop: 2.4em;
+            --tamanho-p-desktop: 1.15em;
+            --espacamento-secao-desktop: 30px;
+            --borda-arredondada: 10px;
+        }
+
+        body {
+            font-family: var(--fonte-principal);
+            margin: 0;
+            padding: 0;
+            background-color: var(--azul-claro);
+            color: var(--texto-principal);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--azul-secundario), var(--azul-primario));
+            color: var(--branco);
+            padding: calc(var(--espacamento-secao-desktop) * 0.8) 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 var(--borda-arredondada) var(--borda-arredondada);
+            position: relative;
+        }
+
+        .admin-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--branco);
+            color: var(--azul-primario);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .admin-button:hover {
+            background-color: var(--azul-primario);
+            color: var(--branco);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: var(--tamanho-h1-desktop);
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: 1.1em;
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 15px 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        nav a {
+            color: var(--azul-primario);
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 25px;
+            background-color: var(--branco);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        nav a:hover {
+            background-color: var(--azul-primario);
+            color: var(--branco);
+        }
+
+        main {
+            padding: calc(var(--espacamento-secao-desktop) * 0.8);
+            text-align: center;
+            background-color: var(--branco);
+            border-radius: var(--borda-arredondada);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+            margin: calc(var(--espacamento-secao-desktop) * 0.8) auto;
+            max-width: 95%;
+        }
+
+        h2 {
+            color: var(--azul-primario);
+            border-bottom: 2px dotted var(--azul-secundario);
+            padding-bottom: 10px;
+            margin-bottom: calc(var(--espacamento-secao-desktop) * 0.6);
+            font-size: var(--tamanho-h2-desktop);
+        }
+
+        .icon {
+            margin-right: 5px;
+            font-size: 1em;
+        }
+
+        main p {
+            font-size: var(--tamanho-p-desktop);
+            margin-bottom: 20px;
+            color: var(--texto-secundario);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--verde-acao);
+            color: var(--branco);
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 1em;
+        }
+
+        .cta-button:hover {
+            background-color: var(--verde-acao-hover);
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #34495e;
+            color: var(--branco);
+            font-size: 0.8em;
+            border-radius: 15px 15px 0 0;
+            margin-top: calc(var(--espacamento-secao-desktop) * 0.6);
+        }
+
+        #cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--branco);
+            color: var(--texto-secundario);
+            padding: 15px;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.9em;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        #cookie-banner p {
+            margin: 0;
+        }
+
+        #cookie-banner a {
+            color: var(--azul-primario);
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+
+        #cookie-banner a:hover {
+            color: #2980b9;
+        }
+
+        .cookie-button {
+            background-color: var(--azul-primario);
+            color: var(--branco);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .cookie-button:hover {
+            background-color: #2980b9;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .cookie-button.reject {
+            background-color: #e74c3c;
+        }
+
+        .cookie-button.reject:hover {
+            background-color: #c0392b;
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 90%;
+                padding: 20px;
+            }
+
+            .hero {
+                padding: 40px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.8em;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1.1em;
+            }
+
+            .destaques-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+
+            .destaque-card {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .hero {
+                padding: 30px 15px;
+            }
+
+            .hero h1 {
+                font-size: 2.2em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            .destaques-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .destaque-card {
+                padding: 20px;
+            }
+
+            .destaque-card h3 {
+                font-size: 1.3em;
+            }
+
+            .destaque-card p {
+                font-size: 0.95em;
+            }
+
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 576px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .hero {
+                padding: 25px 10px;
+            }
+
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .hero p {
+                font-size: 0.95em;
+            }
+
+            .destaques-grid {
+                gap: 15px;
+            }
+
+            .destaque-card {
+                padding: 15px;
+            }
+
+            .destaque-card h3 {
+                font-size: 1.2em;
+                margin-bottom: 10px;
+            }
+
+            .destaque-card p {
+                font-size: 0.9em;
+                margin-bottom: 15px;
+            }
+
+            .cta-button {
+                padding: 10px 20px;
+                font-size: 0.95em;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .hero h1 {
+                font-size: 1.8em;
+            }
+
+            .hero p {
+                font-size: 0.9em;
+            }
+
+            .destaques-grid {
+                gap: 10px;
+            }
+
+            .destaque-card {
+                padding: 12px;
+            }
+
+            .destaque-card h3 {
+                font-size: 1.1em;
+            }
+
+            .destaque-card p {
+                font-size: 0.85em;
+            }
+
+            .cta-button {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="cadastro_de_colaboradores.html" class="admin-button">
+            <span class="icon">👤</span> Área Administrativa
+        </a>
+        <h1><span class="icon icon-puzzle">🧩</span> Clínica MODELAR</h1>
+        <p>Um espaço especial para o desenvolvimento e alegria!</p>
+        <nav>
+            <ul>
+                <li><a href="servicos.html"><span class="icon icon-hospital">🏥</span> Nossos Serviços</a></li>
+                <li><a href="cadastro.html"><span class="icon icon-pencil">📝</span> Faça seu Cadastro</a></li>
+                <li><a href="agendamento.html"><span class="icon icon-calendar">📅</span> Agende sua Consulta</a></li>
+                <li><a href="redes-sociais.html"><span class="icon icon-globe">🌐</span> Nossas Redes</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="apresentacao-clinica">
+            <h2>Um Mundo de Cuidados para Crescer Feliz!</h2>
+            <p>Na Clínica MODELAR, cada criança é vista como um universo único, com suas próprias cores e ritmos de aprendizado. Nossa equipe multidisciplinar é como um time de super-heróis do desenvolvimento infantil, pronto para oferecer um cuidado completo e cheio de carinho.</p>
+            <p>Acreditamos que brincar é a forma mais gostosa de aprender e que cada pequena conquista merece ser celebrada. Explore nossos serviços e descubra como podemos ser parte da jornada de crescimento do seu filho!</p>
+            <p><a href="servicos.html" class="cta-button">Conheça Nossos Serviços Incríveis!</a></p>
+        </section>
+
+        <section id="jogo-da-velha" style="margin-top: 50px; text-align: center;">
+            <button id="abrir-jogo" style="
+                background-color: var(--azul-primario);
+                color: white;
+                border: none;
+                padding: 15px 30px;
+                border-radius: 25px;
+                font-size: 1.2em;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            ">
+                🎮 Clique para Jogar Jogo da Velha!
+            </button>
+            <div id="conteudo-jogo" style="display: none; margin-top: 20px;">
+                <h2>Vamos Jogar Jogo da Velha!</h2>
+                <div id="game-board" style="display: grid; grid-template-columns: repeat(3, 100px); gap: 5px; justify-content: center; margin: 20px auto;"></div>
+                <p id="status" style="text-align: center; font-weight: bold;"></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Clínica MODELAR - Cuidado Multidisciplinar Infantil. Todos os direitos reservados.</p>
+    </footer>
+
+    <div id="cookie-banner">
+        <p>Este site usa cookies para melhorar sua experiência. <a href="/politica-de-cookies" style="color: var(--azul-primario); text-decoration: underline;">Leia nossa política de cookies</a>.</p>
+        <button class="cookie-button" id="accept-cookies">Aceito</button>
+        <button class="cookie-button reject" id="reject-cookies">Não Aceito</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const COOKIE_CONSENT_KEY = 'cookieConsent';
+            const COOKIE_BANNER_ID = 'cookie-banner';
+            const ACCEPT_BUTTON_ID = 'accept-cookies';
+            const REJECT_BUTTON_ID = 'reject-cookies';
+
+            const cookieBanner = document.getElementById(COOKIE_BANNER_ID);
+            const acceptButton = document.getElementById(ACCEPT_BUTTON_ID);
+            const rejectButton = document.getElementById(REJECT_BUTTON_ID);
+
+            const showBanner = () => {
+                cookieBanner.style.display = 'flex';
+                cookieBanner.style.animation = 'slideUp 0.5s ease-out';
+            };
+
+            const hideBanner = () => {
+                cookieBanner.style.animation = 'slideDown 0.5s ease-out';
+                setTimeout(() => {
+                    cookieBanner.style.display = 'none';
+                }, 500);
+            };
+
+            const handleCookieConsent = (consent) => {
+                localStorage.setItem(COOKIE_CONSENT_KEY, consent);
+                hideBanner();
+
+                if (consent === 'accepted') {
+                    initializeAnalytics();
+                } else {
+                    disableAnalytics();
+                }
+            };
+
+            const initializeAnalytics = () => {
+                console.log('Analytics inicializado');
+            };
+
+            const disableAnalytics = () => {
+                console.log('Analytics desativado');
+            };
+
+            const checkCookieConsent = () => {
+                const consent = localStorage.getItem(COOKIE_CONSENT_KEY);
+                if (!consent) {
+                    setTimeout(showBanner, 1000);
+                } else if (consent === 'accepted') {
+                    initializeAnalytics();
+                }
+            };
+
+            acceptButton.addEventListener('click', () => handleCookieConsent('accepted'));
+            rejectButton.addEventListener('click', () => handleCookieConsent('rejected'));
+
+            checkCookieConsent();
+        });
+    </script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const board = Array(9).fill('');
+            let currentPlayer = 'X';
+            let gameActive = true;
+
+            const gameBoard = document.getElementById('game-board');
+            const status = document.getElementById('status');
+            const abrirJogoBtn = document.getElementById('abrir-jogo');
+            const conteudoJogo = document.getElementById('conteudo-jogo');
+
+            // Função para mostrar/esconder o jogo
+            abrirJogoBtn.addEventListener('click', () => {
+                if (conteudoJogo.style.display === 'none') {
+                    conteudoJogo.style.display = 'block';
+                    abrirJogoBtn.textContent = '❌ Fechar Jogo';
+                    createBoard();
+                    status.textContent = `Vez do jogador ${currentPlayer}`;
+                } else {
+                    conteudoJogo.style.display = 'none';
+                    abrirJogoBtn.textContent = '🎮 Clique para Jogar Jogo da Velha!';
+                    // Resetar o jogo quando fechar
+                    board.fill('');
+                    currentPlayer = 'X';
+                    gameActive = true;
+                }
+            });
+
+            function createBoard() {
+                gameBoard.innerHTML = '';
+                board.forEach((cell, index) => {
+                    const cellElement = document.createElement('div');
+                    cellElement.style.width = '100px';
+                    cellElement.style.height = '100px';
+                    cellElement.style.border = '2px solid #3498db';
+                    cellElement.style.display = 'flex';
+                    cellElement.style.alignItems = 'center';
+                    cellElement.style.justifyContent = 'center';
+                    cellElement.style.fontSize = '2em';
+                    cellElement.style.cursor = 'pointer';
+                    cellElement.style.userSelect = 'none';
+                    cellElement.style.backgroundColor = 'white';
+                    cellElement.style.transition = 'background-color 0.3s ease';
+                    cellElement.textContent = cell;
+                    cellElement.addEventListener('click', () => handleMove(index));
+                    cellElement.addEventListener('mouseover', () => {
+                        if (!cell && gameActive) {
+                            cellElement.style.backgroundColor = '#f0f8ff';
+                        }
+                    });
+                    cellElement.addEventListener('mouseout', () => {
+                        if (!cell) {
+                            cellElement.style.backgroundColor = 'white';
+                        }
+                    });
+                    gameBoard.appendChild(cellElement);
+                });
+            }
+
+            function handleMove(index) {
+                if (!gameActive || board[index]) return;
+
+                board[index] = currentPlayer;
+                createBoard();
+
+                if (checkWin()) {
+                    status.textContent = `Jogador ${currentPlayer} venceu!`;
+                    gameActive = false;
+                } else if (board.every(cell => cell)) {
+                    status.textContent = 'Empate!';
+                    gameActive = false;
+                } else {
+                    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                    status.textContent = `Vez do jogador ${currentPlayer}`;
+                }
+            }
+
+            function checkWin() {
+                const winPatterns = [
+                    [0,1,2], [3,4,5], [6,7,8],
+                    [0,3,6], [1,4,7], [2,5,8],
+                    [0,4,8], [2,4,6]
+                ];
+                return winPatterns.some(pattern => {
+                    const [a, b, c] = pattern;
+                    return board[a] && board[a] === board[b] && board[a] === board[c];
+                });
+            }
+        });
+    </script>
+</body>
+</html>

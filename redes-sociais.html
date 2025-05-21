@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MODELAR Clínica Infantil - Conecte-se com a Alegria!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
+        :root {
+            --azul-primario: #3498db;
+            --azul-secundario: #81cfe0;
+            --azul-claro: #f0f8ff;
+            --texto-principal: #4a647a;
+            --texto-secundario: #555;
+            --branco: #fff;
+            --facebook: #3b5998;
+            --instagram: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            --linkedin: #0077b5;
+            --sombra: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --borda-arredondada: 15px;
+            --transicao: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--azul-claro);
+            color: var(--texto-principal);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--azul-secundario), var(--azul-primario));
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: var(--sombra);
+            border-radius: 0 0 var(--borda-arredondada) var(--borda-arredondada);
+            color: var(--branco);
+            position: relative;
+        }
+
+        .admin-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--branco);
+            color: var(--azul-primario);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: var(--transicao);
+        }
+
+        .admin-button:hover {
+            background-color: var(--azul-primario);
+            color: var(--branco);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: 1.1em;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 20px 0;
+            margin: 0;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        nav ul li {
+            margin: 0;
+        }
+
+        nav a {
+            color: var(--azul-primario);
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            background-color: var(--branco);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: var(--transicao);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        nav a:hover {
+            background-color: var(--azul-primario);
+            color: var(--branco);
+            transform: translateY(-2px);
+        }
+
+        main {
+            padding: 40px 20px;
+            background-color: var(--branco);
+            border-radius: var(--borda-arredondada);
+            box-shadow: var(--sombra);
+            margin: 40px auto;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        h2 {
+            color: var(--azul-primario);
+            border-bottom: 3px dotted var(--azul-secundario);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 2.4em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        #redes-sociais {
+            padding: 20px;
+        }
+
+        #redes-sociais p {
+            font-size: 1.1em;
+            color: var(--texto-secundario);
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        #redes-sociais ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        #redes-sociais ul li a {
+            color: var(--branco);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 30px;
+            border-radius: 30px;
+            transition: var(--transicao);
+            box-shadow: var(--sombra);
+            font-weight: 600;
+            font-size: 1.1em;
+            width: 100%;
+            gap: 10px;
+        }
+
+        #redes-sociais ul li a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .facebook-link {
+            background-color: var(--facebook);
+        }
+
+        .instagram-link {
+            background: var(--instagram);
+        }
+
+        .linkedin-link {
+            background-color: var(--linkedin);
+        }
+
+        .icon {
+            font-size: 1.5em;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #34495e;
+            color: var(--branco);
+            font-size: 0.9em;
+            border-radius: var(--borda-arredondada) var(--borda-arredondada) 0 0;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 1200px) {
+            .redes-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+                padding: 20px;
+            }
+
+            .rede-card {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            h2 {
+                font-size: 2.2em;
+                padding: 0 15px;
+            }
+
+            .redes-grid {
+                gap: 20px;
+                padding: 15px;
+            }
+
+            .rede-card {
+                padding: 20px;
+            }
+
+            .rede-card h3 {
+                font-size: 1.4em;
+            }
+
+            .rede-card p {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 2em;
+                margin-bottom: 25px;
+            }
+
+            .redes-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 10px;
+            }
+
+            .rede-card {
+                padding: 20px;
+            }
+
+            .rede-card h3 {
+                font-size: 1.3em;
+            }
+
+            .rede-card p {
+                font-size: 0.95em;
+            }
+
+            .rede-card .botao {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 576px) {
+            body {
+                padding: 10px;
+            }
+
+            h2 {
+                font-size: 1.8em;
+                padding: 0 10px;
+            }
+
+            .redes-grid {
+                gap: 15px;
+                padding: 5px;
+            }
+
+            .rede-card {
+                padding: 15px;
+            }
+
+            .rede-card h3 {
+                font-size: 1.2em;
+                margin-bottom: 10px;
+            }
+
+            .rede-card p {
+                font-size: 0.9em;
+                margin-bottom: 15px;
+            }
+
+            .rede-card .botao {
+                padding: 8px 15px;
+                font-size: 0.85em;
+            }
+        }
+
+        @media (max-width: 360px) {
+            h2 {
+                font-size: 1.6em;
+            }
+
+            .redes-grid {
+                gap: 10px;
+            }
+
+            .rede-card {
+                padding: 12px;
+            }
+
+            .rede-card h3 {
+                font-size: 1.1em;
+            }
+
+            .rede-card p {
+                font-size: 0.85em;
+            }
+
+            .rede-card .botao {
+                padding: 6px 12px;
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="cadastro_de_colaboradores.html" class="admin-button">
+            <span class="icon">👤</span> Área Administrativa
+        </a>
+        <h1><span class="icon icon-puzzle">🧩</span> Clínica MODELAR</h1>
+        <p>Compartilhando sorrisos e aprendizados com você!</p>
+        <nav>
+            <ul>
+                <li><a href="servicos.html"><span class="icon icon-hospital">🏥</span> Nossos Serviços</a></li>
+                <li><a href="cadastro.html"><span class="icon icon-pencil">📝</span> Faça seu Cadastro</a></li>
+                <li><a href="agendamento.html"><span class="icon icon-calendar">📅</span> Agende sua Consulta</a></li>
+                <li><a href="redes-sociais.html"><span class="icon icon-globe">🌐</span> Nossas Redes</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="redes-sociais">
+            <h2><span class="icon">📣</span> Siga Nossas Aventuras!</h2>
+            <p>Fique por dentro de dicas de desenvolvimento infantil, momentos especiais e as últimas novidades da Clínica MODELAR. Conecte-se com a nossa comunidade de pais e profissionais que inspiram!</p>
+            <ul>
+                <li><a href="https://www.facebook.com/modelarclinicainfantil" target="_blank" class="facebook-link"><span class="icon">f</span> Siga no Facebook</a></li>
+                <li><a href="https://www.instagram.com/modelar_kids" target="_blank" class="instagram-link"><span class="icon">📸</span> Veja nosso Instagram</a></li>
+                <li><a href="https://www.linkedin.com/company/clínica-modelar-infantil" target="_blank" class="linkedin-link"><span class="icon">in</span> Conecte no LinkedIn</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Clínica MODELAR - Cuidado Multidisciplinar Infantil. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>

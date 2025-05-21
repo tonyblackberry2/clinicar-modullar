@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento - Clínica MODELAR</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-analytics-compat.js"></script>
+    <script>
+        window.addEventListener('load', function() {
+            const firebaseConfig = {
+                apiKey: "AIzaSyBAmWs1Poa41WmQNp8FK7ZyMuy9yzY0OOg",
+                authDomain: "clinicamodelar-a85bf.firebaseapp.com",
+                projectId: "clinicamodelar-a85bf",
+                storageBucket: "clinicamodelar-a85bf.firebasestorage.app",
+                messagingSenderId: "235094571400",
+                appId: "1:235094571400:web:294bc3bf91cecd29f5e23d",
+                measurementId: "G-FPFDX9R7Y9"
+            };
+
+            if (!firebase.apps.length) {
+                firebase.initializeApp(firebaseConfig);
+            }
+            window.analytics = firebase.analytics();
+            
+            window.analytics.logEvent('page_view', {
+                page_title: 'Agendamento',
+                page_location: window.location.href,
+                page_path: window.location.pathname
+            });
+        });
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
+        :root {
+            --azul-primario: #3498db;
+            --azul-secundario: #81cfe0;
+            --azul-claro: #f0f8ff;
+            --texto-principal: #4a647a;
+            --texto-secundario: #34495e;
+            --branco: #fff;
+            --verde: #2ecc71;
+            --verde-hover: #27ae60;
+            --cinza: #bdc3c7;
+            --cinza-claro: #f9f9f9;
+            --sombra: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --sombra-hover: 0 6px 12px rgba(0, 0, 0, 0.15);
+            --borda-arredondada: 15px;
+            --transicao: all 0.3s ease;
+            --gradiente-header: linear-gradient(135deg, var(--azul-secundario), var(--azul-primario));
+            --gradiente-botao: linear-gradient(90deg, var(--verde), var(--verde-hover));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--azul-claro);
+            color: var(--texto-principal);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 {
+            color: var(--azul-primario);
+            border-bottom: 3px dotted var(--azul-secundario);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 2.4em;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            position: relative;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .admin-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--branco);
+            color: var(--azul-primario);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: var(--transicao);
+        }
+
+        .admin-button:hover {
+            background-color: var(--azul-primario);
+            color: var(--branco);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .mensagem-sucesso {
+            display: none;
+            background-color: var(--branco);
+            padding: 30px;
+            border-radius: var(--borda-arredondada);
+            box-shadow: var(--sombra);
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: center;
+            animation: slideIn 0.5s ease-out;
+            border: 2px solid var(--verde);
+        }
+
+        .mensagem-sucesso h2 {
+            color: var(--verde);
+            border: none;
+            margin-bottom: 20px;
+        }
+
+        .mensagem-sucesso p {
+            font-size: 1.2em;
+            margin: 15px 0;
+            color: var(--texto-secundario);
+        }
+
+        .mensagem-sucesso .botao {
+            display: inline-block;
+            background: var(--gradiente-botao);
+            color: var(--branco);
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: var(--transicao);
+            box-shadow: var(--sombra);
+        }
+
+        .mensagem-sucesso .botao:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--sombra-hover);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        form {
+            background-color: var(--branco);
+            padding: 40px;
+            border-radius: var(--borda-arredondada);
+            box-shadow: var(--sombra);
+            max-width: 800px;
+            margin: 20px auto;
+            animation: fadeIn 1s ease-out;
+        }
+
+        fieldset {
+            border: 2px solid var(--azul-secundario);
+            border-radius: var(--borda-arredondada);
+            padding: 30px;
+            margin-bottom: 40px;
+            transition: var(--transicao);
+        }
+
+        fieldset:hover {
+            border-color: var(--azul-primario);
+            box-shadow: var(--sombra);
+        }
+
+        legend {
+            color: var(--azul-primario);
+            font-weight: 700;
+            font-size: 1.2em;
+            padding: 0 15px;
+            background: var(--branco);
+            border-radius: 8px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--texto-secundario);
+            font-size: 1.1em;
+        }
+
+        form div {
+            margin-bottom: 25px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="time"],
+        input[type="email"],
+        input[type="datetime-local"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 5px;
+            border: 2px solid var(--cinza);
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1em;
+            background-color: var(--cinza-claro);
+            transition: var(--transicao);
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--azul-primario);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            transform: translateY(-2px);
+        }
+
+        select {
+            appearance: none;
+            background-image: url('data:image/svg+xml;charset=UTF-8,<svg fill="%233498db" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position-x: 95%;
+            background-position-y: center;
+            padding-right: 25px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        button[type="submit"] {
+            background: var(--gradiente-botao);
+            color: var(--branco);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: var(--transicao);
+            box-shadow: var(--sombra);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px auto;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--sombra-hover);
+        }
+
+        .icon {
+            font-size: 1.2em;
+        }
+
+        .mensagem-erro {
+            display: none;
+            margin-top: 5px;
+            color: #e74c3c;
+            font-size: 0.9em;
+            font-weight: 600;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 1200px) {
+            form {
+                max-width: 90%;
+                margin: 20px auto;
+            }
+
+            .botoes-navegacao {
+                gap: 10px;
+            }
+
+            .botao-navegacao {
+                padding: 8px 15px;
+                font-size: 0.85em;
+            }
+        }
+
+        @media (max-width: 992px) {
+            h2 {
+                font-size: 2.2em;
+                padding: 0 15px;
+            }
+
+            form {
+                padding: 30px;
+            }
+
+            fieldset {
+                padding: 25px;
+            }
+
+            input[type="text"],
+            input[type="date"],
+            input[type="time"],
+            input[type="email"],
+            input[type="datetime-local"],
+            select,
+            textarea {
+                padding: 12px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 2em;
+                margin-bottom: 25px;
+            }
+
+            .botoes-navegacao {
+                position: static;
+                flex-direction: row;
+                justify-content: center;
+                margin: 15px auto;
+                max-width: 300px;
+            }
+
+            form {
+                padding: 25px;
+                margin: 15px auto;
+            }
+
+            fieldset {
+                padding: 20px;
+                margin-bottom: 25px;
+            }
+
+            legend {
+                font-size: 1.1em;
+            }
+
+            label {
+                font-size: 1em;
+            }
+
+            input[type="text"],
+            input[type="date"],
+            input[type="time"],
+            input[type="email"],
+            input[type="datetime-local"],
+            select,
+            textarea {
+                font-size: 0.95em;
+                padding: 10px;
+            }
+
+            button[type="submit"] {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+
+            .mensagem-sucesso {
+                padding: 20px;
+                margin: 15px auto;
+            }
+
+            .mensagem-sucesso h2 {
+                font-size: 1.8em;
+            }
+
+            .mensagem-sucesso p {
+                font-size: 1.1em;
+            }
+        }
+
+        @media (max-width: 576px) {
+            body {
+                padding: 10px;
+            }
+
+            h2 {
+                font-size: 1.8em;
+                padding: 0 10px;
+            }
+
+            .botoes-navegacao {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                margin: 10px auto;
+            }
+
+            .botao-navegacao {
+                width: 100%;
+                justify-content: center;
+                padding: 10px;
+            }
+
+            form {
+                padding: 20px;
+                margin: 10px auto;
+            }
+
+            fieldset {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+
+            legend {
+                font-size: 1em;
+            }
+
+            label {
+                font-size: 0.95em;
+                margin-bottom: 5px;
+            }
+
+            form div {
+                margin-bottom: 15px;
+            }
+
+            input[type="text"],
+            input[type="date"],
+            input[type="time"],
+            input[type="email"],
+            input[type="datetime-local"],
+            select,
+            textarea {
+                font-size: 0.9em;
+                padding: 8px;
+            }
+
+            button[type="submit"] {
+                padding: 10px 20px;
+                font-size: 0.95em;
+            }
+
+            .mensagem-sucesso {
+                padding: 15px;
+                margin: 10px auto;
+            }
+
+            .mensagem-sucesso h2 {
+                font-size: 1.6em;
+            }
+
+            .mensagem-sucesso p {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 360px) {
+            h2 {
+                font-size: 1.6em;
+            }
+
+            .botoes-navegacao {
+                margin: 5px auto;
+            }
+
+            form {
+                padding: 15px;
+            }
+
+            fieldset {
+                padding: 12px;
+                margin-bottom: 15px;
+            }
+
+            input[type="text"],
+            input[type="date"],
+            input[type="time"],
+            input[type="email"],
+            input[type="datetime-local"],
+            select,
+            textarea {
+                font-size: 0.85em;
+                padding: 6px;
+            }
+
+            button[type="submit"] {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+        }
+
+        .botoes-navegacao {
+            display: flex;
+            gap: 15px;
+            margin: 20px;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+        }
+
+        .botao-navegacao {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transicao);
+            box-shadow: var(--sombra);
+            background: var(--gradiente-botao);
+            color: var(--branco);
+            border: none;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        .botao-navegacao:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--sombra-hover);
+        }
+
+        .botao-navegacao.voltar {
+            background: linear-gradient(90deg, var(--azul-primario), var(--azul-secundario));
+        }
+    </style>
+</head>
+<body>
+    <div class="botoes-navegacao">
+        <a href="index.html" class="botao-navegacao voltar">
+            <span class="icon">🏠</span> Voltar para Início
+        </a>
+        <a href="servicos.html" class="botao-navegacao voltar">
+            <span class="icon">🏥</span> Ver Serviços
+        </a>
+    </div>
+
+    <h2>
+        <span class="icon">📅</span> Agende sua Consulta
+    </h2>
+    
+    <div id="mensagem-sucesso" class="mensagem-sucesso">
+        <h2><span class="icon">✅</span> Agendamento Realizado com Sucesso!</h2>
+        <p>Seu encontro mágico foi agendado. Em breve, entraremos em contato com mais detalhes.</p>
+        <a href="servicos.html" class="botao" id="novo-agendamento">Agendar outra consulta</a>
+    </div>
+
+    <form id="agendamentoForm" action="/agendar" method="POST">
+        <fieldset>
+            <legend>Informações do Paciente</legend>
+            <div>
+                <label for="nome_paciente">Nome Completo do Paciente:</label>
+                <input type="text" id="nome_paciente" name="nome_paciente" placeholder="Digite o nome completo" required>
+                <span class="mensagem-erro" id="nome_paciente-erro">Apenas letras e espaços são permitidos.</span>
+            </div>
+
+            <div>
+                <label for="data_nascimento">Data de Nascimento:</label>
+                <input type="date" id="data_nascimento" name="data_nascimento" required>
+            </div>
+
+            <div>
+                <label for="nome_responsavel">Nome do Responsável:</label>
+                <input type="text" id="nome_responsavel" name="nome_responsavel" placeholder="Digite o nome do responsável" required>
+                <span class="mensagem-erro" id="nome_responsavel-erro">Apenas letras e espaços são permitidos.</span>
+            </div>
+
+            <div>
+                <label for="telefone_responsavel">Telefone do Responsável:</label>
+                <input type="tel" id="telefone_responsavel" name="telefone_responsavel" pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}" placeholder="(XX) XXXX-XXXX ou (XX) XXXXX-XXXX" required>
+                <span class="mensagem-erro" id="telefone_responsavel-erro">Formato de telefone inválido. Use (XX) XXXX-XXXX ou (XX) XXXXX-XXXX.</span>
+            </div>
+
+            <div>
+                <label for="email_responsavel">E-mail do Responsável:</label>
+                <input type="email" id="email_responsavel" name="email_responsavel" placeholder="Digite o e-mail do responsável">
+                <span class="mensagem-erro" id="email_responsavel-erro">Digite um e-mail válido.</span>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Detalhes do Agendamento</legend>
+            <div>
+                <label for="especialidade">Especialidade Desejada:</label>
+                <select id="especialidade" name="especialidade" required>
+                    <option value="">Selecione a Especialidade</option>
+                    <option value="pediatria">Pediatria</option>
+                    <option value="fonoaudiologia">Fonoaudiologia</option>
+                    <option value="psicologia">Psicologia</option>
+                    <option value="terapia_ocupacional">Terapia Ocupacional</option>
+                    <option value="fisioterapia">Fisioterapia</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="profissional">Profissional Desejado:</label>
+                <select id="profissional" name="profissional">
+                    <option value="">Selecione o Profissional</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="data_hora">Data e Hora Desejadas:</label>
+                <input type="datetime-local" id="data_hora" name="data_hora" required>
+            </div>
+
+            <div>
+                <label for="observacoes">Observações Adicionais:</label>
+                <textarea id="observacoes" name="observacoes" rows="4" placeholder="Digite aqui qualquer observação importante"></textarea>
+            </div>
+        </fieldset>
+
+        <button type="submit"><span class="icon">✅</span> Agendar Consulta</button>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const formulario = document.getElementById('agendamentoForm');
+            const mensagemSucesso = document.getElementById('mensagem-sucesso');
+            const botaoNovoAgendamento = document.getElementById('novo-agendamento');
+            const especialidadeSelect = document.getElementById('especialidade');
+            const profissionalSelect = document.getElementById('profissional');
+
+            function registrarEvento(nomeEvento, parametros = {}) {
+                try {
+                    if (window.analytics) {
+                        window.analytics.logEvent(nomeEvento, parametros);
+                        console.log('Evento registrado:', nomeEvento, parametros);
+                    } else {
+                        console.error('Analytics não inicializado');
+                    }
+                } catch (erro) {
+                    console.error('Erro ao registrar evento:', erro);
+                }
+            }
+
+            const campos = {
+                nomePaciente: {
+                    input: document.getElementById('nome_paciente'),
+                    erro: document.getElementById('nome_paciente-erro'),
+                    regex: /^[a-zA-ZÀ-ÿ\s]+$/,
+                    permitir: /[a-zA-ZÀ-ÿ\s]/
+                },
+                nomeResponsavel: {
+                    input: document.getElementById('nome_responsavel'),
+                    erro: document.getElementById('nome_responsavel-erro'),
+                    regex: /^[a-zA-ZÀ-ÿ\s]+$/,
+                    permitir: /[a-zA-ZÀ-ÿ\s]/
+                },
+                telefoneResponsavel: {
+                    input: document.getElementById('telefone_responsavel'),
+                    erro: document.getElementById('telefone_responsavel-erro'),
+                    regex: /^\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}$/,
+                    permitir: /[0-9()-]/
+                },
+                emailResponsavel: {
+                    input: document.getElementById('email_responsavel'),
+                    erro: document.getElementById('email_responsavel-erro'),
+                    regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+                }
+            };
+
+            const validarCampo = (campo) => {
+                const { input, erro, regex, permitir } = campo;
+                
+                if (campo === campos.nomePaciente || campo === campos.nomeResponsavel) {
+                    const valor = input.value;
+                    const novoValor = valor.split('').filter(char => permitir.test(char)).join('');
+                    if (valor !== novoValor) {
+                        input.value = novoValor;
+                    }
+                }
+
+                if (campo === campos.telefoneResponsavel) {
+                    const valor = input.value.replace(/\D/g, '');
+                    if (valor.length <= 11) {
+                        let formatado = '';
+                        if (valor.length > 0) formatado += `(${valor.slice(0, 2)}`;
+                        if (valor.length > 2) formatado += `) ${valor.slice(2, 7)}`;
+                        if (valor.length > 7) formatado += `-${valor.slice(7, 11)}`;
+                        input.value = formatado;
+                    }
+                }
+
+                if (regex && !regex.test(input.value)) {
+                    erro.style.display = 'block';
+                    return false;
+                }
+
+                erro.style.display = 'none';
+                return true;
+            };
+
+            Object.entries(campos).forEach(([key, campo]) => {
+                const { input } = campo;
+
+                if (key === 'nomePaciente' || key === 'nomeResponsavel') {
+                    input.addEventListener('keypress', (e) => {
+                        if (!campo.permitir.test(e.key)) {
+                            e.preventDefault();
+                        }
+                    });
+
+                    input.addEventListener('paste', (e) => {
+                        e.preventDefault();
+                        const texto = (e.clipboardData || window.clipboardData).getData('text');
+                        const textoFiltrado = texto.split('').filter(char => campo.permitir.test(char)).join('');
+                        input.value = textoFiltrado;
+                        validarCampo(campo);
+                    });
+                }
+
+                input.addEventListener('input', () => validarCampo(campo));
+            });
+
+            const profissionais = {
+                pediatria: ['Dr. João Silva', 'Dra. Maria Santos'],
+                fonoaudiologia: ['Dra. Ana Oliveira', 'Dra. Carla Lima'],
+                psicologia: ['Dr. Pedro Costa', 'Dra. Juliana Alves'],
+                terapia_ocupacional: ['Dra. Fernanda Souza', 'Dra. Beatriz Martins'],
+                fisioterapia: ['Dr. Lucas Pereira', 'Dra. Camila Rodrigues']
+            };
+
+            especialidadeSelect.addEventListener('change', () => {
+                const especialidade = especialidadeSelect.value;
+                profissionalSelect.innerHTML = '<option value="">Selecione o Profissional</option>';
+                
+                if (especialidade && profissionais[especialidade]) {
+                    profissionais[especialidade].forEach(prof => {
+                        const option = document.createElement('option');
+                        option.value = prof.toLowerCase().replace(/\s+/g, '_');
+                        option.textContent = prof;
+                        profissionalSelect.appendChild(option);
+                    });
+                }
+
+                registrarEvento('especialidade_selecionada', {
+                    especialidade: especialidade
+                });
+            });
+
+            profissionalSelect.addEventListener('change', (e) => {
+                registrarEvento('profissional_selecionado', {
+                    profissional: e.target.value
+                });
+            });
+
+            botaoNovoAgendamento.addEventListener('click', () => {
+                registrarEvento('novo_agendamento_iniciado');
+            });
+
+            formulario.addEventListener('submit', (event) => {
+                event.preventDefault();
+                
+                const todosValidos = Object.values(campos).every(validarCampo);
+                
+                if (todosValidos) {
+                    registrarEvento('agendamento_tentativa', {
+                        especialidade: especialidadeSelect.value,
+                        profissional: profissionalSelect.value
+                    });
+
+                    formulario.style.display = 'none';
+                    mensagemSucesso.style.display = 'block';
+
+                    registrarEvento('agendamento_sucesso', {
+                        especialidade: especialidadeSelect.value,
+                        profissional: profissionalSelect.value,
+                        data_hora: document.getElementById('data_hora').value
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
